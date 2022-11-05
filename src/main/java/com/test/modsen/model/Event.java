@@ -22,14 +22,5 @@ public class Event {
     private Timestamp time;
     private String place;
 
-    @Override
-    public String toString() {
-        return "Event{" +
-                "id=" + id +
-                ", subject='" + subject + '\'' +
-                ", organizer='" + organizer + '\'' +
-                ", time=" + time.toString() +
-                ", place='" + place + '\'' +
-                '}';
-    }
+
 }

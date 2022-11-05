@@ -4,6 +4,8 @@ import com.test.modsen.config.HibernateConfig;
 import com.test.modsen.dao.DAOFactory;
 import com.test.modsen.dao.EventDAO;
 import com.test.modsen.model.Event;
+import com.test.modsen.service.EventService;
+import com.test.modsen.service.ServiceFactory;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Controller;
@@ -17,43 +19,48 @@ import java.util.List;
 public class MainController {
     @GetMapping("/getData")
     public String getAllData(Model model) {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        EventDAO eventDAO = daoFactory.getEventDAO();
-        List<Event> list = eventDAO.getEvents();
+
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        EventService eventService = serviceFactory.getEventService();
+        List<Event> list = eventService.getEvents();
         model.addAttribute("eventList", list);
         return "mainPage";
     }
 
     @PostMapping("/deleteEvent/{event}")
     public String deleteEvent(@PathVariable("event") int id) {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        EventDAO eventDAO = daoFactory.getEventDAO();
-        eventDAO.deleteEvent(id);
+
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        EventService eventService = serviceFactory.getEventService();
+        eventService.deleteEvent(id);
         return "redirect:/getData";
     }
 
     @PostMapping("/updateEvent")
-    public String updateUser(Event event) {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        EventDAO eventDAO = daoFactory.getEventDAO();
-        eventDAO.updateEvent(event);
+    public String updateEvent(Event event) {
+
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        EventService eventService = serviceFactory.getEventService();
+        eventService.updateEvent(event);
         return "redirect:/getData";
     }
 
     @GetMapping("/getEvent/byId")
     public String getEventById(@RequestParam int id, Model model) {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        EventDAO eventDAO = daoFactory.getEventDAO();
-        Event event = eventDAO.getEventById(id);
+
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        EventService eventService = serviceFactory.getEventService();
+        Event event = eventService.getEventById(id);
         model.addAttribute("event", event);
         return "forOneEvent";
     }
 
     @PostMapping("/addNewEvent")
     public String createNewEvent(Event event) {
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        EventDAO eventDAO = daoFactory.getEventDAO();
-        eventDAO.addEvent(event);
+
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        EventService eventService = serviceFactory.getEventService();
+        eventService.addEvent(event);
         return "redirect:getData";
     }
 

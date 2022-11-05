@@ -6,6 +6,9 @@ import com.test.modsen.dao.EventDAO;
 import com.test.modsen.dao.SortDAO;
 import com.test.modsen.dao.impl.EventDAOImpl;
 import com.test.modsen.model.Event;
+import com.test.modsen.service.EventService;
+import com.test.modsen.service.ServiceFactory;
+import com.test.modsen.service.SortService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,28 +27,25 @@ public class SortController {
             return "redirect:localhost:8080/getData";
         }
 
-        DAOFactory daoFactory = DAOFactory.getInstance();
-
-        EventDAO eventDAO = daoFactory.getEventDAO();
-        List<Event> eventList = eventDAO.getEvents();
-        SortDAO sortDAO = daoFactory.getSortDAO();
-
-
-        List<Event> list = sortDAO.sortList(eventList, keyWord);
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        EventService eventService = serviceFactory.getEventService();
+        List<Event> eventList = eventService.getEvents();
+        SortService sortService = serviceFactory.getSortService();
+        List<Event> list = sortService.sortList(eventList, keyWord);
         model.addAttribute("eventList", list);
         return "mainPage";
     }
 
     @GetMapping("/filter")
-    public String filterByKeyWord(@RequestParam String keyWord, Model model,@RequestParam String placeholder) {
+    public String filterByKeyWord(@RequestParam String keyWord, Model model, @RequestParam String placeholder) {
         if (keyWord.equals("All")) {
             return "redirect:getData";
         }
-        DAOFactory daoFactory = DAOFactory.getInstance();
-        EventDAO eventDAO = daoFactory.getEventDAO();
-        List<Event> eventList = eventDAO.getEvents();
-        SortDAO sortDAO = daoFactory.getSortDAO();
-        eventList = sortDAO.filtrList(eventList, keyWord, placeholder);
+        ServiceFactory serviceFactory = ServiceFactory.getInstance();
+        EventService eventService = serviceFactory.getEventService();
+        List<Event> eventList = eventService.getEvents();
+        SortService sortService = serviceFactory.getSortService();
+        eventList = sortService.filtrList(eventList, keyWord, placeholder);
         model.addAttribute("eventList", eventList);
         return "mainPage";
     }

@@ -3,11 +3,17 @@ package com.test.modsen.dao.impl;
 import com.test.modsen.config.HibernateConfig;
 import com.test.modsen.dao.EventDAO;
 import com.test.modsen.model.Event;
+import org.hibernate.ObjectDeletedException;
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Component;
 
+import java.sql.SQLException;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import jakarta.persistence.EntityTransaction;
 
 public class EventDAOImpl implements EventDAO {
 
@@ -49,10 +55,15 @@ public class EventDAOImpl implements EventDAO {
 
     @Override
     public Event getEventById(int id) {
-        Session session = HibernateConfig.getSession();
-        session.beginTransaction();
-        Event event = session.load(Event.class, id);
-        session.getTransaction().commit();
+
+
+            Session session = HibernateConfig.getSession();
+            session.beginTransaction();
+          Event event = session.load(Event.class, id);
+            session.getTransaction().commit();
+
+
+
         return event;
     }
 }
