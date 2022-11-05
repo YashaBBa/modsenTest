@@ -1,0 +1,16 @@
+com\test\modsen\dao\EventDAO.class
+com\test\modsen\dao\SortDAO.class
+com\test\modsen\config\HibernateConfig.class
+com\test\modsen\service\impl\EventServiceImpl.class
+com\test\modsen\dao\impl\EventDAOImpl.class
+com\test\modsen\controller\RController.class
+com\test\modsen\ModsenApplication.class
+com\test\modsen\model\Event.class
+com\test\modsen\service\SortService.class
+com\test\modsen\controller\SortController.class
+com\test\modsen\service\impl\SortServiceImpl.class
+com\test\modsen\controller\MainController.class
+com\test\modsen\dao\impl\SortDAOImpl.class
+com\test\modsen\dao\DAOFactory.class
+com\test\modsen\service\EventService.class
+com\test\modsen\service\ServiceFactory.class
