@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+Sort:
+<form action="/auth/sort" method="get">
+    <input type="radio" name="keyWord" value="subject"> Subject
+    <input type="radio" name="keyWord" value="organizer"> Organizer
+    <input type="radio" name="keyWord" value="place"> Place
+    <input type="radio" name="keyWord" value="time"> Time
+    <input type="radio" name="keyWord" value="All" checked> All
+
+    <input type="submit" value="Sort By">
+</form>
+
+<tr th:each="event:${eventList}">
+
+
+    <form th:action="@{'/updateEvent'}" method="post">
+        <td><p th:text="${event.getId()}"></p></td>
+        <td><input th:value="${event.getSubject()}" name="subject">
+        <td/>
+        <td><input th:value="${event.getOrganizer()}" name="organizer"></td>
+        <td><input th:value="${event.getPlace()}" name="place"></td>
+        <td><input th:value="${event.getTime()}" name="time"></td>
+        <td><input type="hidden" th:value="${event.getId()} " name="id"></td>
+
+
+        <div><input type="submit" value="Update"></div>
+    </form>
+    <form th:action="@{'/deleteEvent/'+${event.getId()}}" method="post">
+        <div><input type="submit" value="Delete"></div>
+    </form>
+</tr>
+<form action="/getEvent/byId" method="get">
+    <input value="" name="id" placeholder="id">
+    <input type="submit" value="Search">
+</form>
+<br>
+<br>
+<h1>Create new Event</h1>
+<form action="/addNewEvent" method="post">
+
+
+    <div><input value="" name="subject" placeholder="subject"></div>
+    <div><input value="" name="organizer" placeholder="organizer"></div>
+    <div><input value="" name="place" placeholder="place"></div>
+    <div><input value="" name="time" placeholder="time"></div>
+    <div><input type="submit" value="Create"></div>
+</form>
+<form action="/auth/filter" method="get">
+    <input type="radio" name="placeholder" value="subject"> Subject
+    <input type="radio" name="placeholder" value="organizer"> Organizer
+    <input type="radio" name="placeholder" value="place"> Place
+    <input type="radio" name="placeholder" value="time"> Time
+    <input type="radio" name="placeholder" value="All" checked> All
+    <input value="" name="keyWord">
+    <input type="submit" value="Sort By">
+</form>
+</body>
+</html>

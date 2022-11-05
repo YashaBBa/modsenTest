@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event</title>
+</head>
+<body>
+
+<p th:text="${event.getSubject()}"/>
+<p th:text="${event.getOrganizer()}"/>
+<p th:text="${event.getPlace()}"/>
+<p th:text="${event.getTime()}"/>
+
+
+<a href="/getData">go Back</a>
+
+</body>
+</html>
